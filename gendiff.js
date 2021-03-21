@@ -11,5 +11,6 @@ genDiff
   .option('-f, --format [type]', 'output format')
   .action((filepath1, filepath2) => {
     const output = generateDiff(filepath1, filepath2);
+    console.log(output);
   })
   .parse(process.argv);

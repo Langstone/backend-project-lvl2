@@ -1,13 +1,11 @@
-const fs = require('fs');
-const { result } = require('lodash');
+const parser = require('./parsers/parser.js');
 
 function generateDiff(filepath1, filepath2) {
 
-  const obj1 = JSON.parse(fs.readFileSync(filepath1, 'utf8')); 
-  const obj2 = JSON.parse(fs.readFileSync(filepath2, 'utf8'));
+const obj1 = parser(filepath1);
+const obj2 = parser(filepath2);
+const diff1 = {};
 
-  const diff1 = {};
- 
   Object.keys(obj1).forEach(key1 => {
     if (obj1[key1] !== obj2[key1]) {
       diff1[key1] = [obj1[key1], obj2[key1]]
@@ -23,6 +21,7 @@ function generateDiff(filepath1, filepath2) {
     diff1[key2] = [undefined, obj2[key2]]
   });
   const result = ['{'];
+
   Object.keys(diff1).forEach(key => {
 
     if (Array.isArray(diff1[key])) {
