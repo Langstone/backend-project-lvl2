@@ -1,13 +1,17 @@
-const plainFormatter = require('./plain.js');
-const stylishFormatter = require('./stylish.js');
+const jsonFormatter = require('./json');
+const plainFormatter = require('./plain');
+const stylishFormatter = require('./stylish');
 
 function getFormatter(type = 'plain') {
+  let fn;
   if (type === 'plain') {
-    return plainFormatter;
+    fn = plainFormatter;
+  } else if (type === 'stylish') {
+    fn = stylishFormatter;
+  } else {
+    fn = jsonFormatter;
   }
-  else if (type === 'stylish') {
-    return stylishFormatter;
-  }
+  return fn;
 }
 
 module.exports = getFormatter;

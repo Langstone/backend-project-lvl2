@@ -7,6 +7,6 @@ function parser(filepath) {
     return JSON.parse(fs.readFileSync(filepath, 'utf8'));
   }
   return yaml.load(fs.readFileSync(filepath, 'utf8'));
-};
+}
 
 module.exports = parser;
