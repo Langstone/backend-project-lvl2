@@ -6,6 +6,7 @@ const parser = require('../parsers/parser');
 const generateDiff = require('../formatters/stylish');
 const diffFiles = require('../diff');
 const plainFormatter = require('../formatters/plain');
+const jsonFormatter = require('../formatters/json');
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
@@ -96,5 +97,10 @@ Property 'group1.baz' was updated. From 'bas' to 'bars'
 Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
 Property 'group3' was added with value: [complex value]`,
+  );
+});
+test('chect json formatter', () => {
+  expect(jsonFormatter(diffFiles(parser(getFixturePath('nested_one.yaml')), parser(getFixturePath('nested_two.yaml'))))).toBe(
+    `{"common":{"setting1":{"__equal__":true,"__after__":"Value 1","__before__":"Value 1"},"setting2":{"__equal__":false,"__before__":200},"setting3":{"__equal__":false,"__after__":null,"__before__":true},"setting6":{"key":{"__equal__":true,"__after__":"value","__before__":"value"},"doge":{"wow":{"__equal__":false,"__after__":"so much","__before__":null}},"ops":{"__equal__":false,"__after__":"vops"}},"follow":{"__equal__":false,"__after__":false},"setting4":{"__equal__":false,"__after__":"blah blah"},"setting5":{"__equal__":false,"__after__":{"key5":"value5"}}},"group1":{"baz":{"__equal__":false,"__after__":"bars","__before__":"bas"},"foo":{"__equal__":true,"__after__":"bar","__before__":"bar"},"nest":{"__equal__":false,"__after__":"str","__before__":{"key":"value"}}},"group2":{"__equal__":false,"__before__":{"abc":12345,"deep":{"id":null}}},"group3":{"__equal__":false,"__after__":{"deep":{"id":{"number":45}},"fee":100500}}}`
   );
 });
