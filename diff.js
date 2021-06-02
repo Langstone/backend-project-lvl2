@@ -1,4 +1,4 @@
-const _ = require('lodash');
+import _ from 'lodash';
 
 function diffFiles(obj1, obj2) {
   const result = {};
@@ -32,4 +32,4 @@ function diffFiles(obj1, obj2) {
   return result;
 }
 
-module.exports = diffFiles;
+export default diffFiles;

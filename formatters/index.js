@@ -1,6 +1,6 @@
-const jsonFormatter = require('./json');
-const plainFormatter = require('./plain');
-const stylishFormatter = require('./stylish');
+import plainFormatter from './plain.js';
+import jsonFormatter from './json.js';
+import stylishFormatter from './stylish.js';
 
 function getFormatter(type = 'plain') {
   let fn;
@@ -14,4 +14,4 @@ function getFormatter(type = 'plain') {
   return fn;
 }
 
-module.exports = getFormatter;
+export default getFormatter;

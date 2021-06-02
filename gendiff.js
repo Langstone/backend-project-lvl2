@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-const Commander = require('commander');
-const getFormatter = require('./formatters');
-const diffFiles = require('./diff');
-const parser = require('./parsers/parser');
+import Commander from 'commander';
+import getFormatter from './formatters/index.js';
+import diffFiles from './diff.js';
+import parser from './parsers/parser.js';
 
 const genDiff = new Commander.Command();
 

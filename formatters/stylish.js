@@ -1,4 +1,4 @@
-const _ = require('lodash');
+import _ from 'lodash';
 
 function simpleRecursion(obj, lvl) {
   let result = [];
@@ -61,4 +61,4 @@ function generateDiff(obj) {
   return result.join('\n');
 }
 
-module.exports = generateDiff;
+export default generateDiff;

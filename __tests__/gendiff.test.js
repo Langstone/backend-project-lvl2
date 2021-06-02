@@ -1,12 +1,12 @@
 /* global test, expect */
 /* eslint-disable max-len */
 
-const path = require('path');
-const parser = require('../parsers/parser');
-const generateDiff = require('../formatters/stylish');
-const diffFiles = require('../diff');
-const plainFormatter = require('../formatters/plain');
-const jsonFormatter = require('../formatters/json');
+import { path } from 'path';
+import parser from '../parsers/parser.js';
+import generateDiff from '../formatters/stylish.js';
+import diffFiles from '../diff.js';
+import plainFormatter from '../formatters/plain.js';
+import jsonFormatter from '../formatters/json.js';
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 

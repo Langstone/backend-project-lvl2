@@ -1,4 +1,4 @@
-const _ = require('lodash');
+import _ from 'lodash';
 
 function defineType(value) {
   if (typeof value === 'string') {
@@ -47,4 +47,4 @@ function plainFormatter(obj) {
   return result.join('\n');
 }
 
-module.exports = plainFormatter;
+export default plainFormatter;
