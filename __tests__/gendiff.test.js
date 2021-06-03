@@ -1,14 +1,14 @@
 /* global test, expect */
 /* eslint-disable max-len */
 
-import { path } from 'path';
+import { join } from 'path';
 import parser from '../parsers/parser.js';
 import generateDiff from '../formatters/stylish.js';
 import diffFiles from '../diff.js';
 import plainFormatter from '../formatters/plain.js';
 import jsonFormatter from '../formatters/json.js';
 
-const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const getFixturePath = (filename) => join(__dirname, '..', '__fixtures__', filename);
 
 test('check parser', () => {
   expect(parser(getFixturePath('nested_one.yaml'))).toStrictEqual(
