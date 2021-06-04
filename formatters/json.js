@@ -25,9 +25,9 @@ function stringifyValue(value, lvl) {
   return `${value}`;
 }
 
-function complexRecursion(obj, lvl = 1) {
+function complexRecursion(obj, lvl = 3) {
   let result = [];
-  const indent = '  ';
+  const indent = ' ';
   const repeatIndent = indent.repeat(lvl);
   Object.keys(obj).forEach((key) => {
     const value = obj[key];
