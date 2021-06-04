@@ -48,7 +48,7 @@ function complexRecursion(obj, lvl = 3) {
       result.push(`${indent.repeat(lvl)} ${key}: {`);
       const recursionResult = complexRecursion(value, lvl + 1);
       result = result.concat(recursionResult);
-      result.push(`${indent.repeat(lvl + 1)} }`);
+      result.push(`${indent.repeat(lvl + 3)} }`);
     }
   });
   return result;
