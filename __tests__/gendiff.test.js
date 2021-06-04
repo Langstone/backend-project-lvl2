@@ -26,48 +26,12 @@ test('check diff', () => {
   expect(diffFiles(parser(getFixturePath('nested_one.yaml')), parser(getFixturePath('nested_two.yaml')))).toStrictEqual(
     {
       common: {
-          setting1: Value 1
-        - setting2: 200
-        - setting3: true
-        + setting3: null
-          setting6: {
-              key: value
-              doge: {
-                - wow: null
-                + wow: so much
-              }
-            + ops: vops
-          }
-        + follow: false
-        + setting4: blah blah
-        + setting5: {
-            key5: value5
-          }
-      }
-      group1: {
-        - baz: bas
-        + baz: bars
-          foo: bar
-        - nest: {
-            key: value
-          }
-        + nest: str
-      }
-    - group2: {
-        abc: 12345
-          deep: {
-            id: null
-          }
-      }
-    + group3: {
-          deep: {
-              id: {
-                number: 45
-              }
-          }
-        fee: 100500
-      }
- },
+        follow: { __after__: false, __before__: undefined, __equal__: false }, setting1: { __after__: 'Value 1', __before__: 'Value 1', __equal__: true }, setting2: { __after__: undefined, __before__: 200, __equal__: false }, setting3: { __after__: null, __before__: true, __equal__: false }, setting4: { __after__: 'blah blah', __before__: undefined, __equal__: false }, setting5: { __after__: { key5: 'value5' }, __before__: undefined, __equal__: false }, setting6: { doge: { wow: { __after__: 'so much', __before__: null, __equal__: false } }, key: { __after__: 'value', __before__: 'value', __equal__: true }, ops: { __after__: 'vops', __before__: undefined, __equal__: false } },
+      },
+      group1: { baz: { __after__: 'bars', __before__: 'bas', __equal__: false }, foo: { __after__: 'bar', __before__: 'bar', __equal__: true }, nest: { __after__: 'str', __before__: { key: 'value' }, __equal__: false } },
+      group2: { __after__: undefined, __before__: { abc: 12345, deep: { id: null } }, __equal__: false },
+      group3: { __after__: { deep: { id: { number: 45 } }, fee: 100500 }, __before__: undefined, __equal__: false },
+    },
   );
 });
 
@@ -138,6 +102,49 @@ Property 'group3' was added with value: [complex value]`,
 test('chect json formatter', () => {
   expect(jsonFormatter(diffFiles(parser(getFixturePath('nested_one.yaml')), parser(getFixturePath('nested_two.yaml'))))).toBe(
     // eslint-disable-next-line quotes
-    `{"common":{"setting1":{"__equal__":true,"__after__":"Value 1","__before__":"Value 1"},"setting2":{"__equal__":false,"__before__":200},"setting3":{"__equal__":false,"__after__":null,"__before__":true},"setting6":{"key":{"__equal__":true,"__after__":"value","__before__":"value"},"doge":{"wow":{"__equal__":false,"__after__":"so much","__before__":null}},"ops":{"__equal__":false,"__after__":"vops"}},"follow":{"__equal__":false,"__after__":false},"setting4":{"__equal__":false,"__after__":"blah blah"},"setting5":{"__equal__":false,"__after__":{"key5":"value5"}}},"group1":{"baz":{"__equal__":false,"__after__":"bars","__before__":"bas"},"foo":{"__equal__":true,"__after__":"bar","__before__":"bar"},"nest":{"__equal__":false,"__after__":"str","__before__":{"key":"value"}}},"group2":{"__equal__":false,"__before__":{"abc":12345,"deep":{"id":null}}},"group3":{"__equal__":false,"__after__":{"deep":{"id":{"number":45}},"fee":100500}}}`,
+    {
+      common: {
+          setting1: Value 1
+        - setting2: 200
+        - setting3: true
+        + setting3: null
+          setting6: {
+              key: value
+              doge: {
+                - wow: null
+                + wow: so much
+              }
+            + ops: vops
+          }
+        + follow: false
+        + setting4: blah blah
+        + setting5: {
+            key5: value5
+          }
+      }
+      group1: {
+        - baz: bas
+        + baz: bars
+          foo: bar
+        - nest: {
+            key: value
+          }
+        + nest: str
+      }
+    - group2: {
+        abc: 12345
+          deep: {
+            id: null
+          }
+      }
+    + group3: {
+          deep: {
+              id: {
+                number: 45
+              }
+          }
+        fee: 100500
+      }
+ },
   );
 });

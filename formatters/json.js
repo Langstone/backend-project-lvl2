@@ -6,9 +6,9 @@ function simpleRecursion(obj, lvl) {
   Object.keys(obj).forEach((key) => {
     const value = obj[key];
     if (!_.isPlainObject(value)) {
-      result.push(`${indent.repeat(lvl + 1)} ${key}: ${value}`);
+      result.push(`${indent.repeat(lvl)}${key}: ${value}`);
     } else {
-      result.push(`${indent.repeat(lvl + 2)} ${key}: {`);
+      result.push(`${indent.repeat(lvl)}${key}: {`);
       result = result.concat(simpleRecursion(value, lvl + 2));
     }
   });
@@ -18,37 +18,37 @@ function simpleRecursion(obj, lvl) {
 
 function stringifyValue(value, lvl) {
   if (_.isPlainObject(value)) {
-    const result = simpleRecursion(value, lvl + 1).join('\n');
+    const result = simpleRecursion(value, lvl + 2).join('\n');
     return `{\n${result}`;
   }
 
   return `${value}`;
 }
 
-function complexRecursion(obj, lvl = 3) {
+function complexRecursion(obj, lvl = 0) {
   let result = [];
-  const indent = ' ';
-  const repeatIndent = indent.repeat(lvl);
+  const indent = '  ';
+  const repeatIndent = indent.repeat(lvl - 1);
   Object.keys(obj).forEach((key) => {
     const value = obj[key];
     if ('__equal__' in value) {
       if (value.__equal__ === true) {
-        result.push(`${indent.repeat(lvl + 1)} ${key}: ${stringifyValue(value.__before__, lvl)}`);
+        result.push(`${indent.repeat(lvl)}${key}: ${stringifyValue(value.__before__, lvl)}`);
       } else if (value.__equal__ === false) {
         if (value.__before__ === undefined) {
-          result.push(`${repeatIndent} + ${key}: ${stringifyValue(value.__after__, lvl)}`);
+          result.push(`${repeatIndent}+ ${key}: ${stringifyValue(value.__after__, lvl)}`);
         } else if (value.__after__ === undefined) {
-          result.push(`${repeatIndent} - ${key}: ${stringifyValue(value.__before__, lvl)}`);
+          result.push(`${repeatIndent}- ${key}: ${stringifyValue(value.__before__, lvl)}`);
         } else {
-          result.push(`${repeatIndent} - ${key}: ${stringifyValue(value.__before__, lvl)}`);
-          result.push(`${repeatIndent} + ${key}: ${stringifyValue(value.__after__, lvl)}`);
+          result.push(`${repeatIndent}- ${key}: ${stringifyValue(value.__before__, lvl)}`);
+          result.push(`${repeatIndent}+ ${key}: ${stringifyValue(value.__after__, lvl)}`);
         }
       }
     } else {
-      result.push(`${indent.repeat(lvl)} ${key}: {`);
-      const recursionResult = complexRecursion(value, lvl + 3);
+      result.push(`${indent.repeat(lvl + 2)}${key}: {`);
+      const recursionResult = complexRecursion(value, lvl + 4);
       result = result.concat(recursionResult);
-      result.push(`${indent.repeat(lvl + 3)} }`);
+      result.push(`${indent.repeat(lvl + 2)} }`);
     }
   });
   return result;
