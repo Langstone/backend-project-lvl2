@@ -1,7 +1,7 @@
 import generateDiff from './stylish.js';
 
 function jsonFormatter(obj) {
-  return JSON.parse(generateDiff(obj));
+  return generateDiff(obj);
 }
 
 export default jsonFormatter;
