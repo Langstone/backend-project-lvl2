@@ -25,7 +25,7 @@ function stringifyValue(value, lvl) {
   return `${value}`;
 }
 
-function complexRecursion(obj, lvl = 0) {
+function complexRecursion(obj, lvl = 1) {
   let result = [];
   const indent = '  ';
   const repeatIndent = indent.repeat(lvl);
@@ -46,7 +46,7 @@ function complexRecursion(obj, lvl = 0) {
       }
     } else {
       result.push(`${indent.repeat(lvl + 1)} ${key}: {`);
-      const recursionResult = complexRecursion(value, lvl + 2);
+      const recursionResult = complexRecursion(value, lvl + 1);
       result = result.concat(recursionResult);
       result.push(`${indent.repeat(lvl + 1)} }`);
     }
