@@ -12,7 +12,7 @@ function simpleRecursion(obj, lvl) {
       result = result.concat(simpleRecursion(value, lvl + 2));
     }
   });
-  result.push(`${indent.repeat(lvl)} }`);
+  result.push(`${indent.repeat(lvl - 2)}}`);
   return result;
 }
 
@@ -21,15 +21,12 @@ function stringifyValue(value, lvl) {
     const result = simpleRecursion(value, lvl + 2).join('\n');
     return `{\n${result}`;
   }
-
   return `${value}`;
 }
 
-function complexRecursion(obj, lvl = 0) {
+function complexRecursion(obj, lvl = 2) {
   let result = [];
   const indent = '  ';
-  const count = lvl - 1;
-  const repeatIndent = indent.repeat(count);
   Object.keys(obj).forEach((key) => {
     const value = obj[key];
     if ('__equal__' in value) {
@@ -37,19 +34,19 @@ function complexRecursion(obj, lvl = 0) {
         result.push(`${indent.repeat(lvl)}${key}: ${stringifyValue(value.__before__, lvl)}`);
       } else if (value.__equal__ === false) {
         if (value.__before__ === undefined) {
-          result.push(`${repeatIndent}+ ${key}: ${stringifyValue(value.__after__, lvl)}`);
+          result.push(`${indent.repeat(lvl - 1)}+ ${key}: ${stringifyValue(value.__after__, lvl)}`);
         } else if (value.__after__ === undefined) {
-          result.push(`${repeatIndent}- ${key}: ${stringifyValue(value.__before__, lvl)}`);
+          result.push(`${indent.repeat(lvl - 1)}- ${key}: ${stringifyValue(value.__before__, lvl)}`);
         } else {
-          result.push(`${repeatIndent}- ${key}: ${stringifyValue(value.__before__, lvl)}`);
-          result.push(`${repeatIndent}+ ${key}: ${stringifyValue(value.__after__, lvl)}`);
+          result.push(`${indent.repeat(lvl - 1)}- ${key}: ${stringifyValue(value.__before__, lvl)}`);
+          result.push(`${indent.repeat(lvl - 1)}+ ${key}: ${stringifyValue(value.__after__, lvl)}`);
         }
       }
     } else {
-      result.push(`${indent.repeat(lvl + 2)}${key}: {`);
-      const recursionResult = complexRecursion(value, lvl + 4);
+      result.push(`${indent.repeat(lvl)}${key}: {`);
+      const recursionResult = complexRecursion(value, lvl + 2);
       result = result.concat(recursionResult);
-      result.push(`${indent.repeat(lvl + 2)} }`);
+      result.push(`${indent.repeat(lvl)}}`);
     }
   });
   return result;

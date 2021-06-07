@@ -102,49 +102,49 @@ Property 'group3' was added with value: [complex value]`,
 test('chect json formatter', () => {
   expect(jsonFormatter(diffFiles(parser(getFixturePath('nested_one.yaml')), parser(getFixturePath('nested_two.yaml'))))).toBe(
     // eslint-disable-next-line quotes
-    {
-      common: {
-          setting1: Value 1
-        - setting2: 200
-        - setting3: true
-        + setting3: null
-          setting6: {
-              key: value
-              doge: {
-                - wow: null
-                + wow: so much
-              }
-            + ops: vops
-          }
-        + follow: false
-        + setting4: blah blah
-        + setting5: {
-            key5: value5
-          }
-      }
-      group1: {
-        - baz: bas
-        + baz: bars
-          foo: bar
-        - nest: {
+    `{
+    common: {
+        setting1: Value 1
+      - setting2: 200
+      - setting3: true
+      + setting3: null
+        setting6: {
             key: value
-          }
-        + nest: str
-      }
-    - group2: {
+            doge: {
+              - wow: null
+              + wow: so much
+            }
+          + ops: vops
+        }
+      + follow: false
+      + setting4: blah blah
+      + setting5: {
+            key5: value5
+        }
+    }
+    group1: {
+      - baz: bas
+      + baz: bars
+        foo: bar
+      - nest: {
+            key: value
+        }
+      + nest: str
+    }
+  - group2: {
         abc: 12345
-          deep: {
+        deep: {
             id: null
-          }
-      }
-    + group3: {
-          deep: {
-              id: {
+        }
+    }
+  + group3: {
+        deep: {
+            id: {
                 number: 45
-              }
-          }
+            }
+        }
         fee: 100500
-      }
- },
+    }
+}`,
   );
 });
