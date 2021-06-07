@@ -6,6 +6,8 @@ export default function compare(filepath1, filepath2) {
   const formatter = getFormatter('json');
   const obj1 = parser(filepath1);
   const obj2 = parser(filepath2);
+  console.log(JSON.stringify(obj1));
+  console.log(JSON.stringify(obj2));
   const diffObj = diffFiles(obj1, obj2);
   const output = formatter(diffObj);
   return output;
