@@ -2,7 +2,6 @@ import _ from 'lodash';
 
 function diffFiles(obj1, obj2) {
   const result = {};
-
   const uniqKeys = _.uniq(_.concat(_.keys(obj1), _.keys(obj2)));
 
   uniqKeys.forEach((uniqKey) => {
@@ -13,7 +12,8 @@ function diffFiles(obj1, obj2) {
     };
 
     if (obj1[uniqKey] !== undefined && obj2[uniqKey] !== undefined) {
-      if (_.isArray(obj1[uniqKey]) || _.isPlainObject(obj2[uniqKey])) {
+      const recursionRequired = _.isPlainObject(obj1[uniqKey]) && _.isPlainObject(obj2[uniqKey]);
+      if (recursionRequired) {
         result[uniqKey] = diffFiles(obj1[uniqKey], obj2[uniqKey]);
       } else {
         uniqKeyResult.__equal__ = obj1[uniqKey] === obj2[uniqKey];
