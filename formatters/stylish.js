@@ -36,7 +36,7 @@ function complexRecursion(obj, lvl = 1) {
         result.push(`${indent.repeat(lvl + 1)}${key}: ${stringifyValue(value.before, lvl)}`);
       } else if (value.equal === false) {
         if (value.before === undefined) {
-          result.push(`${repeatIndent}+ ${key}: ${stringifyValue(value.__after__, lvl)}`);
+          result.push(`${repeatIndent}+ ${key}: ${stringifyValue(value.after, lvl)}`);
         } else if (value.after === undefined) {
           result.push(`${repeatIndent}- ${key}: ${stringifyValue(value.before, lvl)}`);
         } else {
