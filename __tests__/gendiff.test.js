@@ -38,61 +38,61 @@ test('check diff', () => {
 test('check stylish', () => {
   expect(generateDiff(diffFiles(parser(getFixturePath('nested_one.yaml')), parser(getFixturePath('nested_two.yaml'))))).toBe(
     `{
-     common: {
-         setting1: Value 1
-       - setting2: 200
-       - setting3: true
-       + setting3: null
-         setting6: {
-             key: value
-             doge: {
-               - wow: null
-               + wow: so much
-             }
-           + ops: vops
-         }
-       + follow: false
-       + setting4: blah blah
-       + setting5: {
-           key5: value5
-         }
-     }
-     group1: {
-       - baz: bas
-       + baz: bars
-         foo: bar
-       - nest: {
-           key: value
-         }
-       + nest: str
-     }
-   - group2: {
-       abc: 12345
-         deep: {
-           id: null
-         }
-     }
-   + group3: {
-         deep: {
-             id: {
-               number: 45
-             }
-         }
-       fee: 100500
-     }
+    common: {
+      + follow: false
+        setting1: Value 1
+      - setting2: 200
+      - setting3: true
+      + setting3: null
+      + setting4: blah blah
+      + setting5: {
+          key5: value5
+        }
+        setting6: {
+            doge: {
+              - wow: null
+              + wow: so much
+            }
+            key: value
+          + ops: vops
+        }
+    }
+    group1: {
+      - baz: bas
+      + baz: bars
+        foo: bar
+      - nest: {
+          key: value
+        }
+      + nest: str
+    }
+  - group2: {
+      abc: 12345
+        deep: {
+          id: null
+        }
+    }
+  + group3: {
+        deep: {
+            id: {
+              number: 45
+            }
+        }
+      fee: 100500
+    }
 }`,
   );
 });
 
 test('check plain', () => {
   expect(plainFormatter(diffFiles(parser(getFixturePath('nested_one.yaml')), parser(getFixturePath('nested_two.yaml'))))).toBe(
-    `Property 'common.setting2' was removed
+    `Property 'common.follow' was added with value: false
+Property 'common.setting2' was removed
 Property 'common.setting3' was updated. From true to null
-Property 'common.setting6.doge.wow' was updated. From null to 'so much'
-Property 'common.setting6.ops' was added with value: 'vops'
-Property 'common.follow' was added with value: false
 Property 'common.setting4' was added with value: 'blah blah'
 Property 'common.setting5' was added with value: [complex value]
+Property 'common.setting6.doge.wow' was updated. From null to 'so much'
+Property 'common.setting6.ops' was added with value: 'vops'
 Property 'group1.baz' was updated. From 'bas' to 'bars'
 Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
@@ -100,26 +100,27 @@ Property 'group3' was added with value: [complex value]`,
   );
 });
 test('chect json formatter', () => {
-  expect(jsonFormatter(diffFiles(parser(getFixturePath('nested_one.yaml')), parser(getFixturePath('nested_two.yaml'))))).toBe(
-    // eslint-disable-next-line quotes
+  expect(jsonFormatter(diffFiles(parser(getFixturePath('nested_one.json')), parser(getFixturePath('nested_two.json'))))).toBe(
     `{
     common: {
+      + follow: false
         setting1: Value 1
       - setting2: 200
       - setting3: true
-      + setting3: null
-        setting6: {
+      + setting3: {
             key: value
-            doge: {
-              - wow: null
-              + wow: so much
-            }
-          + ops: vops
         }
-      + follow: false
       + setting4: blah blah
       + setting5: {
             key5: value5
+        }
+        setting6: {
+            doge: {
+              - wow: too much
+              + wow: so much
+            }
+            key: value
+          + ops: vops
         }
     }
     group1: {
@@ -134,7 +135,7 @@ test('chect json formatter', () => {
   - group2: {
         abc: 12345
         deep: {
-            id: null
+            id: 45
         }
     }
   + group3: {
@@ -144,6 +145,23 @@ test('chect json formatter', () => {
             }
         }
         fee: 100500
+    }
+    group4: {
+      - default: null
+      + default: 
+      - foo: 0
+      + foo: null
+      - isNested: false
+      + isNested: none
+      + key: false
+        nest: {
+          - bar: 
+          + bar: 0
+          - isNested: true
+        }
+      + someKey: true
+      - type: bas
+      + type: bar
     }
 }`,
   );
