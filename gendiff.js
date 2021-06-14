@@ -1,19 +1,20 @@
 #!/usr/bin/env node
+
 import Commander from 'commander';
 import getFormatter from './formatters/index.js';
 import diffFiles from './diff.js';
 import parser from './parsers/parser.js';
 
-const genDiff = new Commander.Command();
+const command = new Commander.Command();
 
-genDiff.version('0.0.1');
+command.version('0.0.1');
 
-genDiff
+command
   .description('Compares two configuration files and shows a difference.')
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format [type]', 'output format', 'plain')
   .action((filepath1, filepath2) => {
-    const options = genDiff.opts();
+    const options = command.opts();
     const formatter = getFormatter(options.format);
     const obj1 = parser(filepath1);
     const obj2 = parser(filepath2);
@@ -23,3 +24,8 @@ genDiff
     console.log(output);
   })
   .parse(process.argv);
+
+function genDiff(filepath1, filepath2) {
+  return command.action(filepath1, filepath2);
+}
+export default genDiff;

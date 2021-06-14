@@ -11,7 +11,6 @@
 //   return output;
 // }
 
-import * as gendiff from './gendiff.js';
+import genDiff from './gendiff.js';
 
-console.log(gendiff);
-export default gendiff;
+export default genDiff;
