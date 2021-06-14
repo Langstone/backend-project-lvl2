@@ -11,7 +11,8 @@
 //   return output;
 // }
 
-// eslint-disable-next-line import/named
-import { genDiff } from './gendiff.js';
+import compare from './gendiff.js';
 
-export default genDiff;
+export default function mimo() {
+  return compare;
+}
