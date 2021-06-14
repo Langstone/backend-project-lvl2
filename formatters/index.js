@@ -3,14 +3,13 @@ import jsonFormatter from './json.js';
 import stylishFormatter from './stylish.js';
 
 function getFormatter(type) {
-  const fn;
+  let fn;
   if (type === 'plain') {
     fn = plainFormatter;
   } else if (type === 'stylish') {
     fn = stylishFormatter;
-  // }
-  // else if (type === 'json') {
-  //   fn = jsonFormatter;
+  } else if (type === 'json') {
+    fn = jsonFormatter;
   } else {
     fn = stylishFormatter;
   }
