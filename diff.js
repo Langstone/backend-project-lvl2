@@ -7,9 +7,9 @@ function diffFiles(obj1, obj2) {
 
   uniqKeys.forEach((uniqKey) => {
     const uniqKeyResult = {
-      __equal__: false,
-      __after__: undefined,
-      __before__: undefined,
+      equal: false,
+      after: undefined,
+      before: undefined,
     };
 
     if (obj1[uniqKey] !== undefined && obj2[uniqKey] !== undefined) {
@@ -17,16 +17,16 @@ function diffFiles(obj1, obj2) {
       if (recursionRequired) {
         result[uniqKey] = diffFiles(obj1[uniqKey], obj2[uniqKey]);
       } else {
-        uniqKeyResult.__equal__ = obj1[uniqKey] === obj2[uniqKey];
-        uniqKeyResult.__before__ = obj1[uniqKey];
-        uniqKeyResult.__after__ = obj2[uniqKey];
+        uniqKeyResult.equal = obj1[uniqKey] === obj2[uniqKey];
+        uniqKeyResult.before = obj1[uniqKey];
+        uniqKeyResult.after = obj2[uniqKey];
         result[uniqKey] = uniqKeyResult;
       }
     } else if (obj1[uniqKey] !== undefined) {
-      uniqKeyResult.__before__ = obj1[uniqKey];
+      uniqKeyResult.before = obj1[uniqKey];
       result[uniqKey] = uniqKeyResult;
     } else {
-      uniqKeyResult.__after__ = obj2[uniqKey];
+      uniqKeyResult.after = obj2[uniqKey];
       result[uniqKey] = uniqKeyResult;
     }
   });
