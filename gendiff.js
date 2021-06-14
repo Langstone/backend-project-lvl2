@@ -23,5 +23,3 @@ command
     console.log(output);
   })
   .parse(process.argv);
-
-export default command;
