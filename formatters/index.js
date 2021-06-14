@@ -3,7 +3,7 @@ import jsonFormatter from './json.js';
 import stylishFormatter from './stylish.js';
 
 function getFormatter(type) {
-  let fn;
+  const fn;
   if (type === 'plain') {
     fn = plainFormatter;
   } else if (type === 'stylish') {
