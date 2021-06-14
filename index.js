@@ -11,6 +11,4 @@
 //   return output;
 // }
 
-import genDiff from './gendiff.js';
-
-export default genDiff;
+module.exports = require('./gendiff.js');
