@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+console.log('!!!!!!!!');
+
 function simpleRecursion(obj, lvl) {
   let result = [];
   const indent = '  ';
