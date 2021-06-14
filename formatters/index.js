@@ -11,7 +11,7 @@ function getFormatter(type) {
   } else if (type === 'json') {
     fn = jsonFormatter;
   } else {
-    fn = plainFormatter;
+    fn = stylishFormatter;
   }
   return fn;
 }

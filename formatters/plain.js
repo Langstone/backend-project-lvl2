@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+console.log('!!!!!!!!');
+
 function simpleRecursion(obj, oldKey = '') {
   let result = [];
   let currentKey = oldKey;
