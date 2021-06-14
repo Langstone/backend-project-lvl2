@@ -26,6 +26,6 @@ command
   .parse(process.argv);
 
 function genDiff(filepath1, filepath2) {
-  return command.action(filepath1, filepath2);
+  return command(filepath1, filepath2);
 }
 export default genDiff;
