@@ -11,6 +11,9 @@
 //   return output;
 // }
 
-import genDiff from './gendiff.js';
+// eslint-disable-next-line import/named
+import { command } from './gendiff.js';
 
-export default genDiff;
+export default function genDiff(filepath1, filepath2) {
+  return command(filepath1, filepath2);
+}

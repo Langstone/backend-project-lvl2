@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 import Commander from 'commander';
 import getFormatter from './formatters/index.js';
 import diffFiles from './diff.js';
@@ -24,8 +23,3 @@ command
     console.log(output);
   })
   .parse(process.argv);
-
-function genDiff(filepath1, filepath2) {
-  return command(filepath1, filepath2);
-}
-export default genDiff;
