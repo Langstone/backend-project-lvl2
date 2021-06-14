@@ -11,8 +11,6 @@
 //   return output;
 // }
 
-import compare from './gendiff.js';
+import * as gendiff from './gendiff.js';
 
-export default function mimo() {
-  return compare;
-}
+export default gendiff;
