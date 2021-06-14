@@ -11,4 +11,7 @@
 //   return output;
 // }
 
-module.exports = require('./gendiff.js');
+// eslint-disable-next-line import/named
+import { genDiff } from './gendiff.js';
+
+export default genDiff;
