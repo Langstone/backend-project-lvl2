@@ -12,6 +12,9 @@
     "url": "git+https://github.com/Langstone/backend-project-lvl2.git"
   },
   "author": "",
+  "bin": {
+    "gendiff": "gendiff.js"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Langstone/backend-project-lvl2/issues"
