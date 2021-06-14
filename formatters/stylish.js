@@ -6,7 +6,7 @@ function simpleRecursion(obj, lvl) {
   Object.keys(obj).forEach((key) => {
     const value = obj[key];
     if (!_.isPlainObject(value)) {
-      result.push(`${indent.repeat(lvl + 1)}${key}: ${value}`);
+      result.push(`${indent.repeat(lvl + 2)}${key}: ${value}`);
     } else {
       result.push(`${indent.repeat(lvl + 2)}${key}: {`);
       result = result.concat(simpleRecursion(value, lvl + 2));
