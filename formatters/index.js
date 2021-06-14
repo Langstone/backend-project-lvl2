@@ -8,8 +8,9 @@ function getFormatter(type) {
     fn = plainFormatter;
   } else if (type === 'stylish') {
     fn = stylishFormatter;
-  } else if (type === 'json') {
-    fn = jsonFormatter;
+  // }
+  // else if (type === 'json') {
+  //   fn = jsonFormatter;
   } else {
     fn = stylishFormatter;
   }
