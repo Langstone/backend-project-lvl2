@@ -13,4 +13,5 @@
 
 import * as gendiff from './gendiff.js';
 
+console.log(gendiff);
 export default gendiff;
