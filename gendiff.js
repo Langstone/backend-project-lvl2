@@ -11,7 +11,7 @@ genDiff.version('0.0.1');
 genDiff
   .description('Compares two configuration files and shows a difference.')
   .arguments('<filepath1> <filepath2>')
-  .option('-f, --format [type]', 'output format', 'plain')
+  .option('-f, --format [type]', 'output format', 'stylish')
   .action((filepath1, filepath2) => {
     const options = genDiff.opts();
     const formatter = getFormatter(options.format);
