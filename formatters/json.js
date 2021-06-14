@@ -1,7 +1,5 @@
 import _ from 'lodash';
 
-console.log('!!!!!');
-
 function simpleRecursion(obj, lvl) {
   let result = [];
   const indent = '  ';
@@ -28,7 +26,7 @@ function stringifyValue(value, lvl) {
 }
 
 function complexRecursion(obj, lvl = 1) {
-  let result = [];
+  let result = [1];
   const indent = '  ';
   const repeatIndent = indent.repeat(lvl);
   Object.keys(obj).forEach((key) => {
