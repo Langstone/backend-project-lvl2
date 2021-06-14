@@ -1,13 +1,5 @@
 import _ from 'lodash';
 
-function defineType(value) {
-  if (typeof value === 'string') {
-    return `'${value}'`;
-  }
-
-  return value;
-}
-
 function simpleRecursion(obj, oldKey = '') {
   let result = [];
   let currentKey = oldKey;
@@ -20,16 +12,16 @@ function simpleRecursion(obj, oldKey = '') {
             if (_.isPlainObject(value.__after__)) {
               result.push(`Property '${oldKey}${key}' was added with value: [complex value]`);
             } else {
-              result.push(`Property '${oldKey}${key}' was added with value: ${defineType(value.__after__)}`);
+              result.push(`Property '${oldKey}${key}' was added with value: ${value.__after__}`);
             }
           } else if (value.__after__ === undefined) {
             result.push(`Property '${oldKey}${key}' was removed`);
           } else if (_.isPlainObject(value.__after__)) {
-            result.push(`Property '${oldKey}${key}' was updated. From ${defineType(value.__before__)} to [complex value]`);
+            result.push(`Property '${oldKey}${key}' was updated. From ${value.__before__} to [complex value]`);
           } else if (_.isPlainObject(value.__before__)) {
-            result.push(`Property '${oldKey}${key}' was updated. From [complex value] to ${defineType(value.__after__)}`);
+            result.push(`Property '${oldKey}${key}' was updated. From [complex value] to ${value.__after__}`);
           } else {
-            result.push(`Property '${oldKey}${key}' was updated. From ${defineType(value.__before__)} to ${defineType(value.__after__)}`);
+            result.push(`Property '${oldKey}${key}' was updated. From ${value.__before__} to ${value.__after__}`);
           }
         }
       } else {
