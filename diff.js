@@ -2,8 +2,7 @@ import _ from 'lodash';
 
 function diffFiles(obj1, obj2) {
   const result = {};
-  const primeUniqKeys = _.uniq(_.concat(_.keys(obj1), _.keys(obj2)));
-  const uniqKeys = primeUniqKeys.sort();
+  const uniqKeys = _.uniq(_.concat(_.keys(obj1), _.keys(obj2))).sort();
 
   uniqKeys.forEach((uniqKey) => {
     const uniqKeyResult = {
