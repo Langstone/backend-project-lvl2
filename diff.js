@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 function diffFiles(obj1, obj2) {
-  const uniqKeys = _.uniq(_.concat(_.keys(obj1), _.keys(obj2))).sort();
+  const uniqKeys = _.uniq(_.sortBy(_.concat(_.keys(obj1), _.keys(obj2))));
 
   const result = uniqKeys.map((uniqKey) => {
     if (obj1[uniqKey] !== undefined && obj2[uniqKey] !== undefined) {
